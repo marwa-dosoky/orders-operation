@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Check {
+public class OrderItem {
 
 	@Id
 	@GeneratedValue

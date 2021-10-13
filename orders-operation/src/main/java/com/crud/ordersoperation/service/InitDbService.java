@@ -5,35 +5,35 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.crud.ordersoperation.entity.Check;
-import com.crud.ordersoperation.repository.CheckRepository;
+import com.crud.ordersoperation.entity.OrderItem;
+import com.crud.ordersoperation.repository.OrderItemRepository;
 
 @Service
 public class InitDbService {
 
 	@Autowired
-	private CheckRepository checkRepository;
+	private OrderItemRepository orderItemRepository;
 
 	@PostConstruct
 	public void init() {
 		System.out.println("*** INIT DATABASE START ***");
 		{
-			Check check = new Check();
-			check.setName("example");
-			check.setUrl("http://www.example.com");
-			checkRepository.save(check);
+			OrderItem orderItem = new OrderItem();
+			orderItem.setName("example");
+			orderItem.setUrl("http://www.example.com");
+			orderItemRepository.save(orderItem);
 		}
 		{
-			Check check = new Check();
-			check.setName("orderorder");
-			check.setUrl("http://orderorder.net");
-			checkRepository.save(check);
+			OrderItem orderItem = new OrderItem();
+			orderItem.setName("orderItemorderItem");
+			orderItem.setUrl("http://orderItemorderItem.net");
+			orderItemRepository.save(orderItem);
 		}
 		{
-			Check check = new Check();
-			check.setName("javavids");
-			check.setUrl("http://www.javavids.com");
-			checkRepository.save(check);
+			OrderItem orderItem = new OrderItem();
+			orderItem.setName("javavids");
+			orderItem.setUrl("http://www.javavids.com");
+			orderItemRepository.save(orderItem);
 		}
 		System.out.println("*** INIT DATABASE FINISH ***");
 	}
