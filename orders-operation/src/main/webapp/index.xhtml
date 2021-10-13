@@ -5,62 +5,82 @@
 </h:head>
 <h:body>
 
-<!-- <p:messages id="messages" /> -->
-<p:growl id="messages" />
+	<!-- <p:messages id="messages" /> -->
+	<p:growl id="messages" />
 
-<p:dataTable value="#{orderItemListController.orderItems}" var="orderItem" id="orderItemTable">
-	<p:column headerText="name">
-		#{orderItem.name}
-	</p:column>
-	<p:column headerText="url">
-		<a href="#{orderItem.url}" target="_blank">
-			#{orderItem.url}
-		</a>
-	</p:column>
-	<p:column headerText="operations">
-		<h:form>
-			<p:commandButton value="edit" action="#{orderItemListController.setorderItem(orderItem)}" update=":orderItemForm" resetValues="true" oncomplete="PF('orderItemDialog').show()" />
-			<p:commandButton value="remove" action="#{orderItemListController.remove(orderItem)}" update=":orderItemTable, :messages">
-				<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
-			</p:commandButton>
-		</h:form>
-	</p:column>
-</p:dataTable>
+	<p:dataTable value="#{orderItemListController.orderItems}"
+		var="orderItem" id="orderItemTable">
 
-<br />
-<h:form>
-	<p:commandButton value="add order Item" action="#{orderItemListController.clear()}" 
-					 update=":orderItemForm" 
-					 oncomplete="PF('orderItemDialog').show()"
-					 resetValues="true" />
-</h:form>
+		<p:column headerText="Number">
+			 #{orderItem.num}
+		</p:column>
+		<p:column headerText="Name">
+			 #{orderItem.name}
+		</p:column>
+		<p:column headerText="Email">
+		 #{orderItem.email}
+		
+		</p:column>
+		<p:column headerText="Description">
+				#{orderItem.description} 
+		</p:column>
 
-<p:dialog widgetVar="orderItemDialog" closeOnEscape="true" modal="true" header="order Item">
-<h:form id="orderItemForm">
-	<p:messages />
-	<p:focus />
-	<p:panelGrid columns="2">
+		<p:column headerText="operations">
+			<h:form>
+				<p:commandButton value="edit"
+					action="#{orderItemListController.setOrderItem(orderItem)}"
+					update=":orderItemForm" resetValues="true"
+					oncomplete="PF('orderItemDialog').show()" />
+				<p:commandButton value="remove"
+					action="#{orderItemListController.remove(orderItem)}"
+					update=":orderItemTable, :messages">
+					<p:confirm header="Confirmation" message="Are you sure?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
+			</h:form>
+		</p:column>
+	</p:dataTable>
+
+	<br />
+	<h:form>
+		<p:commandButton value="add order Item"
+			action="#{orderItemListController.clear()}" update=":orderItemForm"
+			oncomplete="PF('orderItemDialog').show()" resetValues="true" />
+	</h:form>
+
+	<p:dialog widgetVar="orderItemDialog" closeOnEscape="true" modal="true"
+		header="order Item">
+		<h:form id="orderItemForm">
+			<p:messages />
+			<p:focus />
+			<p:panelGrid columns="2">
+		number:
+		<p:inputText value="#{orderItemListController.orderItem.num}" />
 		name:
 		<p:inputText value="#{orderItemListController.orderItem.name}" />
-		
-		url:
-		<p:inputText value="#{orderItemListController.orderItem.url}" />
-	</p:panelGrid>
-	<p:commandButton value="save" action="#{orderItemListController.save()}" 
-					 update="orderItemForm, :orderItemTable"
-					 oncomplete="handleDialogSubmit(args, 'orderItemDialog')" />
-</h:form>
-</p:dialog>
+		email:
+		<p:inputText value="#{orderItemListController.orderItem.email}" />
+		description:
+		<p:inputText value="#{orderItemListController.orderItem.description}" />
+			</p:panelGrid>
+			<p:commandButton value="save"
+				action="#{orderItemListController.save()}"
+				update="orderItemForm, :orderItemTable"
+				oncomplete="handleDialogSubmit(args, 'orderItemDialog')" />
+		</h:form>
+	</p:dialog>
 
-<h:form>
-    <p:confirmDialog global="true" closeOnEscape="true">
-        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-orderItem" />
-        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-    </p:confirmDialog>
-</h:form>
+	<h:form>
+		<p:confirmDialog global="true" closeOnEscape="true">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-orderItem" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</h:form>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
     function handleDialogSubmit(args, dialogName) {
         if (!args.validationFailed) {
             PF(dialogName).hide();

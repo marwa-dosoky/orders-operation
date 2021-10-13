@@ -1,5 +1,7 @@
 package com.crud.ordersoperation.service;
 
+import java.util.stream.IntStream;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +19,35 @@ public class InitDbService {
 	@PostConstruct
 	public void init() {
 		System.out.println("*** INIT DATABASE START ***");
-		{
+		System.out.println("*** CREAT SAMPLE DATA ***");
+		
+		IntStream.range(0, 5).forEach(idx -> {
 			OrderItem orderItem = new OrderItem();
-			orderItem.setName("example");
-			orderItem.setUrl("http://www.example.com");
+			orderItem.setName("example"+idx);
+			orderItem.setDescription("example description:"+idx);
+			orderItem.setEmail("example"+idx+"@mail.com");
+			orderItem.setNum(idx);
 			orderItemRepository.save(orderItem);
-		}
-		{
-			OrderItem orderItem = new OrderItem();
-			orderItem.setName("orderItemorderItem");
-			orderItem.setUrl("http://orderItemorderItem.net");
-			orderItemRepository.save(orderItem);
-		}
-		{
-			OrderItem orderItem = new OrderItem();
-			orderItem.setName("javavids");
-			orderItem.setUrl("http://www.javavids.com");
-			orderItemRepository.save(orderItem);
-		}
+		});
+		
+//		{
+//			OrderItem orderItem = new OrderItem();
+//			orderItem.setName("example");
+//			orderItem.setUrl("http://www.example.com");
+//			orderItemRepository.save(orderItem);
+//		}
+//		{
+//			OrderItem orderItem = new OrderItem();
+//			orderItem.setName("orderItemorderItem");
+//			orderItem.setUrl("http://orderItemorderItem.net");
+//			orderItemRepository.save(orderItem);
+//		}
+//		{
+//			OrderItem orderItem = new OrderItem();
+//			orderItem.setName("javavids");
+//			orderItem.setUrl("http://www.javavids.com");
+//			orderItemRepository.save(orderItem);
+//		}
 		System.out.println("*** INIT DATABASE FINISH ***");
 	}
 }
