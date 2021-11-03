@@ -30,24 +30,7 @@ public class InitDbService {
 			orderItemRepository.save(orderItem);
 		});
 		
-//		{
-//			OrderItem orderItem = new OrderItem();
-//			orderItem.setName("example");
-//			orderItem.setUrl("http://www.example.com");
-//			orderItemRepository.save(orderItem);
-//		}
-//		{
-//			OrderItem orderItem = new OrderItem();
-//			orderItem.setName("orderItemorderItem");
-//			orderItem.setUrl("http://orderItemorderItem.net");
-//			orderItemRepository.save(orderItem);
-//		}
-//		{
-//			OrderItem orderItem = new OrderItem();
-//			orderItem.setName("javavids");
-//			orderItem.setUrl("http://www.javavids.com");
-//			orderItemRepository.save(orderItem);
-//		}
+
 		System.out.println("*** INIT DATABASE FINISH ***");
 	}
 }

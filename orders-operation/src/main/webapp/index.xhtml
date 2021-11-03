@@ -46,8 +46,11 @@
 		<p:commandButton value="add order Item"
 			action="#{orderItemListController.clear()}" update=":orderItemForm"
 			oncomplete="PF('orderItemDialog').show()" resetValues="true" />
+	
+		<p:commandButton value="Create Report"
+			action="#{orderItemListController.printPDF()}"   />
+			<!-- update=":orderItemForm" -->
 	</h:form>
-
 	<p:dialog widgetVar="orderItemDialog" closeOnEscape="true" modal="true"
 		header="order Item">
 		<h:form id="orderItemForm">
@@ -55,13 +58,18 @@
 			<p:focus />
 			<p:panelGrid columns="2">
 		number:
-		<p:inputText value="#{orderItemListController.orderItem.num}" />
+		<p:inputText value="#{orderItemListController.orderItem.num}"   >
+			<p:ajax update="orderDesc" process="@this">
+				
+			</p:ajax>
+			
+		</p:inputText>
 		name:
 		<p:inputText value="#{orderItemListController.orderItem.name}" />
 		email:
 		<p:inputText value="#{orderItemListController.orderItem.email}" />
 		description:
-		<p:inputText value="#{orderItemListController.orderItem.description}" />
+		<p:inputText value="#{orderItemListController.orderItem.description}" disabled="#{orderItemListController.orderItem.num > 10}" id="orderDesc"/>
 			</p:panelGrid>
 			<p:commandButton value="save"
 				action="#{orderItemListController.save()}"
@@ -85,6 +93,17 @@
         if (!args.validationFailed) {
             PF(dialogName).hide();
         }
+    }
+
+
+
+    const input = document.querySelector('input');
+    const log = document.getElementById('values');
+
+    input.addEventListener('input', updateValue);
+
+    function updateValue(e) {
+      log.textContent = e.target.value;
     }
 </script>
 
